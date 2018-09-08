@@ -1,12 +1,37 @@
+// --------------------------
+// Configuration
+// --------------------------
+const port = 4000;
+const ROOTPATH = process.cwd();
+
+// --------------------------
+// External Imports
+// --------------------------
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const autoload = require('auto-load');
+
+const ctrl = autoload(path.join(ROOTPATH, '/controllers'))
+
+// --------------------------
+// Define Express app
+// --------------------------
 const app = express();
 
-const port = 4000;
+// --------------------------
+// Middleware
+// --------------------------
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send("Flash Cards Backend");
-});
+// --------------------------
+// Controllers
+// --------------------------
+app.use('/cards', ctrl.cardsController);
 
+// --------------------------
+// Server 
+// --------------------------
 app.listen(port, () => {
-    console.log(`Flash Cards API is listening on port ${port}`);
+    console.log(`Flashcards API is listening on port ${port}`);
 });
