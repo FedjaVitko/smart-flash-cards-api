@@ -1,7 +1,7 @@
 // --------------------------
 // Configuration
 // --------------------------
-const port = 4000;
+const port = 3002;
 const ROOTPATH = process.cwd();
 global.ROOTPATH = ROOTPATH;
 
@@ -11,6 +11,7 @@ global.ROOTPATH = ROOTPATH;
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs');
 const autoload = require('auto-load');
 
 const ctrl = autoload(path.join(ROOTPATH, '/controllers'));
@@ -29,21 +30,23 @@ global.db = require('./libs/db').init();
 // --------------------------
 // Express app
 // --------------------------
-const app = express();
+const api = express();
 
 // --------------------------
 // Middleware
 // --------------------------
-app.use(bodyParser.json());
+api.use(bodyParser.json());
 
 // --------------------------
-// Controllers
+// Routes
 // --------------------------
-app.use('/cards', ctrl.cardsController);
+fs.readdirSync(path.join(__dirname, 'routes')).map(file => {
+    require('./routes/' + file)(api);
+})
 
 // --------------------------
 // Server 
 // --------------------------
-app.listen(port, () => {
+api.listen(port, () => {
     console.log(`Flashcards API is listening on port ${port}`);
 });
