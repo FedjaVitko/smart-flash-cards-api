@@ -8,3 +8,6 @@
 # ---------------------------------------------------------------------
 
 db: mongodb://localhost:27017/smartflash
+env: 'development'
+server:
+  port: 3002

@@ -1,9 +1,7 @@
 // --------------------------
 // Configuration
 // --------------------------
-const port = 3002;
-const ROOTPATH = process.cwd();
-global.ROOTPATH = ROOTPATH;
+global.ROOTPATH = process.cwd();
 
 // --------------------------
 // External Imports
@@ -19,12 +17,12 @@ const ctrl = autoload(path.join(ROOTPATH, '/controllers'));
 // --------------------------
 // Internal Imports
 // --------------------------
-const appconf = require('./libs/config')();
+const conf = require('./libs/config')();
 
 // --------------------------
 // Globals
 // --------------------------
-global.appconfig = appconf.config;
+global.config = conf.config;
 global.db = require('./libs/db').init();
 
 // --------------------------
@@ -47,6 +45,10 @@ fs.readdirSync(path.join(__dirname, 'routes')).map(file => {
 // --------------------------
 // Server 
 // --------------------------
-api.listen(port, () => {
-    console.log(`Flashcards API is listening on port ${port}`);
+api.listen(config.server.port, err => {
+    if (err) {
+        console.error(err);
+        process.exit(1);
+    }
+    console.info(`API is now running on port ${config.server.port} in ${config.env} mode`);
 });

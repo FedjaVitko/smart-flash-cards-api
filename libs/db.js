@@ -45,6 +45,6 @@ module.exports = {
             });
         
         // Connect
-        this.onReady = mongoose.connect(appconfig.db, { useNewUrlParser: true });
+        this.onReady = mongoose.connect(config.db, { useNewUrlParser: true });
     }
 }
