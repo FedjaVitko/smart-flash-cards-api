@@ -3,6 +3,7 @@
 // --------------------------
 const port = 4000;
 const ROOTPATH = process.cwd();
+global.ROOTPATH = ROOTPATH;
 
 // --------------------------
 // External Imports
@@ -12,10 +13,21 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const autoload = require('auto-load');
 
-const ctrl = autoload(path.join(ROOTPATH, '/controllers'))
+const ctrl = autoload(path.join(ROOTPATH, '/controllers'));
 
 // --------------------------
-// Define Express app
+// Internal Imports
+// --------------------------
+const appconf = require('./libs/config')();
+
+// --------------------------
+// Globals
+// --------------------------
+global.appconfig = appconf.config;
+global.db = require('./libs/db').init();
+
+// --------------------------
+// Express app
 // --------------------------
 const app = express();
 
