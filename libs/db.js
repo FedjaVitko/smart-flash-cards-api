@@ -18,8 +18,6 @@ module.exports = {
      * @return {Object} DB instance
      */
     init() {
-        const self = this;
-
         const dbModelsPath = path.join(ROOTPATH, 'models');
 
         mongoose.Promise = require('bluebird');
@@ -34,8 +32,8 @@ module.exports = {
         });
 
         // Expose connection handle
-        self.connection = mongoose.connection;
-        self.ObjectId = mongoose.Types.ObjectId;
+        this.connection = mongoose.connection;
+        this.ObjectId = mongoose.Types.ObjectId;
 
         // Load DB Models
         fs
@@ -43,10 +41,10 @@ module.exports = {
             .filter(file => file.indexOf('.') !== 0)
             .forEach(file => {
                 const modelName = _.upperFirst(_.camelCase(_.split(file, '.')[0]));
-                self[modelName] = require(path.join(dbModelsPath, file));
+                this[modelName] = require(path.join(dbModelsPath, file));
             });
         
         // Connect
-        self.onReady = mongoose.connect(appconfig.db, { useNewUrlParser: true });
+        this.onReady = mongoose.connect(appconfig.db, { useNewUrlParser: true });
     }
 }
