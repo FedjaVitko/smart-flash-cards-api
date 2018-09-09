@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "cd src && nodemon server.js",
+    "test": "NODE_ENV=test node --max-old-space-size=16384 --optimize-for-size node_modules/nyc/bin/nyc.js node_modules/mocha/bin/_mocha --timeout 15000 --require test-entry.js \"test/**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -13,9 +14,20 @@
     "auto-load": "^3.0.1",
     "bluebird": "^3.5.2",
     "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "flatted": "^0.2.3",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.10",
-    "mongoose": "^5.2.13"
+    "mocha": "^5.2.0",
+    "mock-require": "^3.0.2",
+    "mongoose": "^5.2.13",
+    "mongoose-timestamp": "^0.6.0",
+    "sinon": "^6.2.0"
+  },
+  "devDependencies": {
+    "nyc": "^13.0.1"
   }
 }
