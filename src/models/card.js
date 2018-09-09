@@ -11,7 +11,7 @@ module.exports = CardSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        tokenizedAnswer: {
+        tokenizedAnswerJson: {
             type: String,
             required: true
         },
