@@ -13,8 +13,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const autoload = require('auto-load');
 
-const ctrl = autoload(path.join(ROOTPATH, '/controllers'));
-
 // --------------------------
 // Internal Imports
 // --------------------------
@@ -54,3 +52,5 @@ api.listen(config.server.port, err => {
 });
 
 setupExpressErrorHandler(api);
+
+module.exports = api;

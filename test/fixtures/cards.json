@@ -1,0 +1,36 @@
+[
+	{
+		"Card": [
+			{
+                "difficulty": 50,
+                "_id": "5b967d43fb27f771903ce788",
+                "question": "What is life?",
+                "answer": "God knows",
+                "tokenizedAnswerJson": "{\"god\":{\"weight\":3,\"similarTokens\":[\"go\"]},\"it\":{\"weight\":3,\"similarTokens\":[]}}",
+                "updatedAt": "2018-09-10T14:18:43.104Z",
+                "createdAt": "2018-09-10T14:18:43.104Z",
+                "__v": 0
+            },
+			{
+                "difficulty": 50,
+                "_id": "5b967dacfb27f771903ce789",
+                "question": "What is success?",
+                "answer": "To be happy",
+                "tokenizedAnswerJson": "{\"to\":{\"weight\":0,\"similarTokens\":[]},\"bed\":{\"weight\":1,\"similarTokens\":[\"be\"]},\"happy\":{\"weight\":3,\"similarTokens\":[\"happ\"]}}",
+                "updatedAt": "2018-09-10T14:20:28.410Z",
+                "createdAt": "2018-09-10T14:20:28.410Z",
+                "__v": 0
+            },
+			{
+                "difficulty": 50,
+                "_id": "5b967deffb27f771903ce78a",
+                "question": "What is the capital of Great Britain?",
+                "answer": "London",
+                "tokenizedAnswerJson": "{\"london\":{\"weight\":3,\"similarTokens\":[\"londo\",\"lond\"]}}",
+                "updatedAt": "2018-09-10T14:21:35.715Z",
+                "createdAt": "2018-09-10T14:21:35.715Z",
+                "__v": 0
+            }
+		]
+	}
+]
