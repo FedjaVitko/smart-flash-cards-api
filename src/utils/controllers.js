@@ -1,3 +1,5 @@
+const { validationResult } = require('express-validator/check');
+
 /**
  * https://stackoverflow.com/questions/41875617/building-enterprise-app-with-node-express
  * 
@@ -10,6 +12,12 @@
 const controllerHandler = (promise, params) => async (req, res, next) => {
     const boundParams = params ? params(req, res, next) : [];
     try {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+          return res.status(422).json({ errors: errors.array() });
+        }
+
         const result = await promise(...boundParams);
         return res.status(201).json(result || { message: 'OK' });
     } catch (e) {

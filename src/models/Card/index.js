@@ -6,19 +6,19 @@ module.exports = CardSchema = new mongoose.Schema(
     {
         question : {
             type: String,
-            required: [true, 'Please enter the question'],
+            required: true,
             unique: true,
             trim: true
         },
         answer: {
             type: String,
-            required: [true, 'Please enter the answer'],
+            required: true,
             trim: true
         },
         tokenizedAnswerJson: {
             type: String,
             required: true,
-            validate: [ validator.isJSON, 'Invalid answer format' ]
+            validate: [ validator.isJSON ]
         },
         difficulty: {
             type: Number,
