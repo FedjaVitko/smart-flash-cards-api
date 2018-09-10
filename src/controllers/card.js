@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('../config');
 
-const Card = require('../models/card');
+const Card = require('../models/Card');
 
 module.exports.list = async (req, res) => {
     res.send('Here all cards  will be returned.');
@@ -21,10 +21,8 @@ module.exports.post = async (req, res) => {
         answer,
         tokenizedAnswerJson: processedTokenizedAnswerJson
     }
-
-    const card = await Card.create(data);
-
-    res.json(await Card.findOne({ _id: card._id }));
+    
+    res.status(201).json(await Card.create(data));
 };
 
 module.exports.delete = async (req, res) => {

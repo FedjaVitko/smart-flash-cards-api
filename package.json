@@ -25,7 +25,8 @@
     "mock-require": "^3.0.2",
     "mongoose": "^5.2.13",
     "mongoose-timestamp": "^0.6.0",
-    "sinon": "^6.2.0"
+    "sinon": "^6.2.0",
+    "validator": "^10.7.1"
   },
   "devDependencies": {
     "nyc": "^13.0.1"

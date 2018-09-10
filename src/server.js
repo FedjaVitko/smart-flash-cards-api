@@ -19,6 +19,7 @@ const ctrl = autoload(path.join(ROOTPATH, '/controllers'));
 // Internal Imports
 // --------------------------
 const config =  require('./config');
+const setupExpressErrorHandler = require('./utils/errors').setupExpressErrorHandler;
 
 // --------------------------
 // Express app
@@ -51,3 +52,5 @@ api.listen(config.server.port, err => {
     }
     console.info(`API is now running on port ${config.server.port} in ${config.env} mode`);
 });
+
+setupExpressErrorHandler(api);

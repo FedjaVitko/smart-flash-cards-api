@@ -1,19 +1,24 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
+const validator = require('validator');
 
 module.exports = CardSchema = new mongoose.Schema(
     {
         question : {
             type: String,
-            required: true
+            required: [true, 'Please enter the question'],
+            unique: true,
+            trim: true
         },
         answer: {
             type: String,
-            required: true
+            required: [true, 'Please enter the answer'],
+            trim: true
         },
         tokenizedAnswerJson: {
             type: String,
-            required: true
+            required: true,
+            validate: [ validator.isJSON, 'Invalid answer format' ]
         },
         difficulty: {
             type: Number,
