@@ -51,14 +51,22 @@ describe('Card controller', () => {
             });
         });
 
-        // describe('with incorrect user input', () => {
-        //     it('should return 201 for empty fields', () => {
-        //         const data = {
-        //             question : "",
-        //             answer : "",
-        //             tokenizedAnswerJson : "{\"London\": 3}"
-        //         }
-        //     })
-        // })
+        describe('with incorrect user input', () => {
+            it('should return 422 for empty fields', async () => {
+                const data = {
+                    question : "",
+                    answer : "",
+                    tokenizedAnswerJson : ""
+                }
+                const response = await request(api).post('/cards').send(data);
+
+                expect(response).to.have.status(422);
+                expect(response.body.errors).to.be.lengthOf(2);
+
+                response.body.errors.forEach(error => {
+                    expect(error.msg).contains('Please come up with a');
+                });
+            })
+        })
     })
 });
