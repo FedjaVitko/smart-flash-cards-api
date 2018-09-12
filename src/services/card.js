@@ -1,4 +1,6 @@
 const Card = require('../models/Card');
+const Deck = require('../models/Deck');
+const mongoose = require('mongoose');
 
 exports.processTokenizedAnswer = (tokenizedAnswerJson) => {
     const parsedTokenizedAnswer = JSON.parse(tokenizedAnswerJson);
@@ -20,12 +22,29 @@ exports.processTokenizedAnswer = (tokenizedAnswerJson) => {
     return JSON.stringify(processedTokenizedAnswer);
 }
 
-exports.createCard = (question, answer, processedTokenizedAnswerJson) => {
-    return Card.create({
+exports.createCard = async (question, answer, processedTokenizedAnswerJson, deckId) => {
+    const card = await Card.create({
         question,
         answer,
         tokenizedAnswerJson: processedTokenizedAnswerJson
     });
+
+    console.log(card._id);
+
+    const deck = await Deck.findOneAndUpdate({
+        _id: deckId
+    }, {
+        $set: {
+            'name' : 'Mama HELP!!!!!!'
+        }
+        // $push: {
+        //     cards: mongoose.Types.ObjectId(card._id)
+        // }
+    }).exec();
+
+    console.log(deck);
+
+    return card;
 }
 
 prepareToken = (token) => {

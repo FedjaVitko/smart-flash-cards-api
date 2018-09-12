@@ -1,5 +1,3 @@
-const config = require('../config');
-
 const { processTokenizedAnswer, createCard } = require('../services/card');
 
 module.exports.list = async (req, res) => {
@@ -12,7 +10,7 @@ module.exports.get = async (req, res) => {
 
 module.exports.post = async ({ question, answer, tokenizedAnswerJson }) => {
     const processedTokenizedAnswerJson = processTokenizedAnswer(tokenizedAnswerJson);
-    return createCard(question, answer, processedTokenizedAnswerJson);
+    return await createCard(question, answer, processedTokenizedAnswerJson);
 };
 
 module.exports.delete = async (req, res) => {
