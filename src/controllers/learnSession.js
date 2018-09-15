@@ -1,5 +1,5 @@
-const { getDeckCardIds } = require('../services/deck');
-const { getSessionCards } = require('../services/card');
+const { getDeckCardIds } = require('../repositories/deck');
+const { getSessionCards } = require('../services/learnSession');
 
 module.exports.post = async ({ deckId, amount, difficulty }) => {
     const cardIds = await getDeckCardIds(deckId);

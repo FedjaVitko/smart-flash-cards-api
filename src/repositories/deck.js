@@ -1,11 +1,9 @@
 const Deck = require('../models/Deck');
 
 exports.createDeck = (name) => {
-    const deck = Deck.create({
+    return Deck.create({
         name
     });
-
-    return deck;
 }
 
 exports.listDecks = () => {
@@ -28,4 +26,4 @@ exports.getDeckCardIds = async (deckId) => {
     });
 
     return deck.cards;
-} 
+}
