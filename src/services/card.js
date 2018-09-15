@@ -2,6 +2,10 @@ const Card = require('../models/Card');
 const Deck = require('../models/Deck');
 const mongoose = require('mongoose');
 
+// =======================
+// public functions
+// =======================
+
 exports.processTokenizedAnswer = (tokenizedAnswerJson) => {
     const parsedTokenizedAnswer = JSON.parse(tokenizedAnswerJson);
     const tokens = Object.keys(parsedTokenizedAnswer);
@@ -29,23 +33,20 @@ exports.createCard = async (question, answer, processedTokenizedAnswerJson, deck
         tokenizedAnswerJson: processedTokenizedAnswerJson
     });
 
-    console.log(card._id);
-
-    const deck = await Deck.findOneAndUpdate({
+    await Deck.findOneAndUpdate({
         _id: deckId
     }, {
-        $set: {
-            'name' : 'Mama HELP!!!!!!'
+        $push: {
+            cards: card._id
         }
-        // $push: {
-        //     cards: mongoose.Types.ObjectId(card._id)
-        // }
     }).exec();
-
-    console.log(deck);
 
     return card;
 }
+
+// =======================
+// private functions
+// =======================
 
 prepareToken = (token) => {
     const allPunctuation = /[~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g;
