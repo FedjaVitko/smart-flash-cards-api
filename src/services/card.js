@@ -1,6 +1,6 @@
 const Card = require('../models/Card');
-const Deck = require('../models/Deck');
-const mongoose = require('mongoose');
+
+const deckService = require('./deck');
 
 // =======================
 // public functions
@@ -33,20 +33,40 @@ exports.createCard = async (question, answer, processedTokenizedAnswerJson, deck
         tokenizedAnswerJson: processedTokenizedAnswerJson
     });
 
-    await Deck.findOneAndUpdate({
-        _id: deckId
-    }, {
-        $push: {
-            cards: card._id
-        }
-    }).exec();
+    deckService.updateWithCard(deckId, card._id);
 
     return card;
+}
+
+exports.getSessionCards = async (cardIds, amount, difficulty) => {
+    const candidateCards = await Card.find({
+        '_id' : {
+            $in : cardIds            
+        }
+    });
+
+    if (amount > candidateCards.length) {
+        amount = candidateCards.length;
+    }
+
+    return candidateCards.reduce((choosenCards, candidateCard) => {
+        const haveEnough = amount < choosenCards.length;
+
+        if (!haveEnough && isChoosen(candidateCard, difficulty)) {
+            choosenCards.push(candidateCard);
+        }
+
+        return choosenCards;
+    }, []);
 }
 
 // =======================
 // private functions
 // =======================
+
+isChoosen = ({ difficulty }, desiredDifficulty) => {
+    return true; // TODO: will have a mapping
+}
 
 prepareToken = (token) => {
     const allPunctuation = /[~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g;
