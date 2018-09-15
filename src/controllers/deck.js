@@ -1,7 +1,7 @@
-const { createDeck } = require('../services/deck');
+const { createDeck, listDecks } = require('../services/deck');
 
 module.exports.list = async (req, res) => {
-    res.send('Here all decks will be returned.');
+    return listDecks();
 };
 
 module.exports.get = async (req, res) => {

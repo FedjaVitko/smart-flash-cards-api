@@ -7,3 +7,7 @@ exports.createDeck = (name) => {
 
     return deck;
 }
+
+exports.listDecks = () => {
+    return Deck.find({});
+}
