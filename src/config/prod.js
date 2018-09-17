@@ -1,3 +1,5 @@
 module.exports = {
-    port: process.env.PORT
+    server: {
+        port: process.env.PORT
+    }
 };
