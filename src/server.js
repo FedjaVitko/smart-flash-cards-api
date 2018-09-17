@@ -1,5 +1,5 @@
 // --------------------------
-// Configuration
+// Globals
 // --------------------------
 global.ROOTPATH = process.cwd();
 
@@ -18,6 +18,11 @@ const autoload = require('auto-load');
 // --------------------------
 const config =  require('./config');
 const setupExpressErrorHandler = require('./utils/errors').setupExpressErrorHandler;
+
+// --------------------------
+// Configuration
+// --------------------------
+const { server: { PORT }, ENV } = config;
 
 // --------------------------
 // Express app
@@ -43,12 +48,12 @@ fs.readdirSync(path.join(__dirname, 'routes')).forEach(file => {
 // --------------------------
 require('./utils/db');
 
-api.listen(config.server.port, err => {
+api.listen(PORT, err => {
     if (err) {
         console.error(err);
         process.exit(1);
     }
-    console.info(`API is now running on port ${config.server.port} in ${config.env} mode`);
+    console.info(`API is now running on port ${PORT} in ${ENV} mode`);
 });
 
 setupExpressErrorHandler(api);
