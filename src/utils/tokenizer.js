@@ -1,4 +1,6 @@
-const Card = require('../models/Card');
+// =======================
+// public functions
+// =======================
 
 exports.processTokenizedAnswer = (tokenizedAnswerJson) => {
     const parsedTokenizedAnswer = JSON.parse(tokenizedAnswerJson);
@@ -20,13 +22,9 @@ exports.processTokenizedAnswer = (tokenizedAnswerJson) => {
     return JSON.stringify(processedTokenizedAnswer);
 }
 
-exports.createCard = (question, answer, processedTokenizedAnswerJson) => {
-    return Card.create({
-        question,
-        answer,
-        tokenizedAnswerJson: processedTokenizedAnswerJson
-    });
-}
+// =======================
+// private functions
+// =======================
 
 prepareToken = (token) => {
     const allPunctuation = /[~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g;
