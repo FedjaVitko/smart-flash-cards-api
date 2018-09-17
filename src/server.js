@@ -24,6 +24,7 @@ const setupExpressErrorHandler = require('./utils/errors').setupExpressErrorHand
 // Configuration
 // --------------------------
 const { server: { port: PORT }, env: ENV } = config;
+console.log('The actual Heroku port ' + process.env.PORT);
 
 // --------------------------
 // Express app
