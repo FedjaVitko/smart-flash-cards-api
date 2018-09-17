@@ -23,7 +23,7 @@ const setupExpressErrorHandler = require('./utils/errors').setupExpressErrorHand
 // --------------------------
 // Configuration
 // --------------------------
-const { server: { PORT }, ENV } = config;
+const { server: { port: PORT }, env: ENV } = config;
 
 // --------------------------
 // Express app
